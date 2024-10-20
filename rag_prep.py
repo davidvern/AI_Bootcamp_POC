@@ -1,5 +1,6 @@
 def main():
 
+    import os
     from langchain_community.document_loaders import PyPDFLoader
 
     from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -20,7 +21,7 @@ def main():
     # Creating character splitter for document splitting and chunking
     splitter1 = RecursiveCharacterTextSplitter(
         separators=["\n\n", "\n", " ", ""],
-        chunk_size=200,
+        chunk_size=500,
         chunk_overlap=50,
         length_function=count_tokens
     )
