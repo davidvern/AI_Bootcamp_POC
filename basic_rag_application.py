@@ -22,7 +22,7 @@ if os.path.exists('data\\basic_chroma_langchain_db'):
 else:
    import rag_prep
    print('Vector database directory not found, proceeding to create vector datase.')
-   rag_prep()
+   rag_prep.main()
 
 # Define embeddings model
 embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
