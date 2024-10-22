@@ -1,19 +1,13 @@
 import os
+from dotenv import load_dotenv
 from openai import OpenAI
 import tiktoken
-import streamlit as st
-from dotenv import load_dotenv
+load_dotenv('.env')
 
-# Set up the OpenAI API key by setting the OPENAI_API_KEY environment variable
-if load_dotenv('.env'):
-   # for local development
-   OPENAI_KEY = os.getenv('OPENAI_API_KEY')
-else:
-   OPENAI_KEY = st.secrets['OPENAI_API_KEY']
+# Load APIKey into OpenAI Model
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
-# Pass the API Key to the OpenAI Client
-client = OpenAI(api_key=OPENAI_KEY)
-
+# Helper Function 1 : Generate Embedding
 def get_embedding(input, model='text-embedding-3-small'):
     response = client.embeddings.create(
         input=input,
@@ -21,7 +15,7 @@ def get_embedding(input, model='text-embedding-3-small'):
     )
     return [x.embedding for x in response.data]
 
-# This is the "Updated" helper function for calling LLM
+# Helper Function 2 : Call out LLM
 def get_completion(prompt, model="gpt-4o-mini", temperature=0, top_p=1.0, max_tokens=1024, n=1, json_output=False):
     if json_output == True:
       output_json_structure = {"type": "json_object"}
@@ -52,7 +46,7 @@ def get_completion_by_messages(messages, model="gpt-4o-mini", temperature=0, top
     )
     return response.choices[0].message.content
 
-# This function is for calculating the tokens given the "message"
+# Helper Function 3 : Calculating the tokens given the "message"
 # ⚠️ This is simplified implementation that is good enough for a rough estimation
 def count_tokens(text):
     encoding = tiktoken.encoding_for_model('gpt-4o-mini')
