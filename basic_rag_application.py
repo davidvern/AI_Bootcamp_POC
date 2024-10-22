@@ -24,18 +24,31 @@ else:
    print('Vector database directory not found, proceeding to create vector datase.')
    rag_prep.main()
 
+## Load vector database from persistent directory
+
+# Obtain current script's directory
+root_dir = os.path.dirname(os.path.abspath(__file__))
+
+# construct path to the vectordb folder
+persist_directory = os.path.join(root_dir,'data\\basic_chroma_langchain_db')
+
 # Define embeddings model
 embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
 
-# Load vector database from persistent directory
-vectordb = Chroma(persist_directory='data/basic_chroma_langchain_db', embedding_function=embeddings_model)
+# Create langchain Chroma wrapper
+# persist_directory is used to directly load the chromadb vector database into Lancghains Chroma wrapper 
+vectordb_store = Chroma(
+   persist_directory=persist_directory,
+   collection_name='Basic_WQ_reference_material',
+   embedding_function=embeddings_model
+)
 
-f'Collection count for vector db is {vectordb._collection.count()}'
+# print(f'Collection count for vector db is {vectordb._collection.count()}')
 
 # Basic retrieval
 qa_chain = RetrievalQA.from_chain_type(
    ChatOpenAI(model='gpt-4o-mini'),
-   retriever=vectordb.as_retriever(k=20)
+   retriever=vectordb_store.as_retriever(k=20)
 )
 
 print(qa_chain.invoke("What is the safe level for e coli in drinking water?"))
@@ -51,7 +64,7 @@ QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
 # Run chain
 qa_chain2 = RetrievalQA.from_chain_type(
     ChatOpenAI(model='gpt-4o-mini'),
-    retriever=vectordb.as_retriever(k=20),
+    retriever=vectordb_store.as_retriever(k=20),
     return_source_documents=True, # Make inspection of document possible
     chain_type_kwargs={"prompt": QA_CHAIN_PROMPT}
 )

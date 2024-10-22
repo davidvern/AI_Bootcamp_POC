@@ -4,6 +4,7 @@ import streamlit as st
 from helper_functions.utility import text_import 
 from helper_functions.utility import email_msg_import
 from helper_functions.utility import check_password
+from logics.email_query_handler import initial_response
 
 # from logics.custom_query_handler import process_user_message  # placeholder to import logics function
 
@@ -21,6 +22,9 @@ if not check_password():
 ## WHAT IS SHOWN ON THE APP STARTS FROM HERE!!!!
 
 st.title("Water Quality Email Response Generator")
+
+if 'input_mode' not in st.session_state:
+    st.session_state.llm_trigger = False
 
 with st.expander('Click to see disclaimer'):
     st.write('''
@@ -42,13 +46,17 @@ if input_method == "Text Input":
     # Create input are for email body
     text_input = st.text_area("Paste the content of the email below.", height = 300)    
     if st.button('Submit',type="primary"):
-        user_prompt = text_import(text_input)
+        public_query = text_import(text_input)
+        st.session_state.llm_trigger = True
     else:
          st.warning("Please provide an input before submitting")
 else: 
     # if opt for .msg input
     email_input = st.file_uploader('Please upload an email message to submit')
     if email_input is not None:
-        user_prompt = email_msg_import(email_input)
+        public_query = email_msg_import(email_input)
+        st.session_state.llm_trigger = True
 
-a = 0 #placeholder for breakpoint (to delete when next section is added.)
+if st.session_state.llm_trigger:
+    response = initial_response(public_query)   
+    st.write(response)

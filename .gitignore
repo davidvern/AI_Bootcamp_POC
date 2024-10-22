@@ -25,3 +25,4 @@ dist/
 
 # VectorDB
 data/basic_chroma_langchain_db/
+data/*.sqlite3
