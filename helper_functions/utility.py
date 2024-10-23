@@ -29,50 +29,55 @@ def check_password():
         st.error("😕 Password incorrect")  
     return False
 
-def print_header_if_exists(email_object, header_name):
-    value = email_object.get(header_name)
-    if value is not None:
-        st.write(f'{header_name}: {value}')
+def print_header_if_exists(msg, header):
+    if header in msg:
+        st.write(f'{header}: {msg[header]}')
 
 def text_import(text_input):
-
     input_msg = email.message_from_string(text_input)
 
-    # Reinstate below portion if we want to display none when para is not available.
+    email_elements = {
+        'Subject': input_msg.get('Subject', 'N/A'),
+        'From': input_msg.get('From', 'N/A'),
+        'To': input_msg.get('To', 'N/A'),
+        'CC': input_msg.get('CC', 'N/A'),
+        'Date': input_msg.get('Date', 'N/A')
+    }
 
-    # st.write(f'Subject: {input_msg["Subject"]}')
-    # st.write(f'From: {input_msg["From"]}')
-    # st.write(f'To: {input_msg["To"]}')
-    # st.write(f'CC: {input_msg.get("CC","N/A")}')
-    # st.write(f'Date: {input_msg["Date"]}')
-
-    print_header_if_exists(input_msg,'Subject')
-    print_header_if_exists(input_msg,'From')
-    print_header_if_exists(input_msg,'To')
-    print_header_if_exists(input_msg,'CC')
-    print_header_if_exists(input_msg,'Date')
-
+    print_header_if_exists(input_msg, 'Subject')
+    print_header_if_exists(input_msg, 'From')
+    print_header_if_exists(input_msg, 'To')
+    print_header_if_exists(input_msg, 'CC')
+    print_header_if_exists(input_msg, 'Date')
 
     st.write("Body")
     if input_msg.is_multipart():
         for part in input_msg.walk():
-            if part.get_content_type == 'text/plain':
-                st.text(part.get_payload(decode=True).decode())
-
+            if part.get_content_type() == 'text/plain':
+                body = part.get_payload(decode=True).decode()
+                st.text(body)
     else:
-        st.write(input_msg.get_payload(decode=True).decode())
+        body = input_msg.get_payload(decode=True).decode()
+        st.write(body)
     
     # Extract email body for input into the LLM. 
-    return input_msg.get_payload(decode=True).decode()
+    return body, email_elements
 
 
 def email_msg_import(raw_msg):
-    
     # reading the file
     raw_data = raw_msg.read()
 
     # parsing the message file
     msg_file = extract_msg.Message(io.BytesIO(raw_data))
+
+    email_elements = {
+        'Subject': msg_file.subject,
+        'From': msg_file.sender,
+        'To': msg_file.to,
+        'CC': msg_file.cc,
+        'Date': msg_file.date
+    }
 
     st.write(f'Subject: {msg_file.subject}')
     st.write(f'From: {msg_file.sender}')
@@ -83,7 +88,8 @@ def email_msg_import(raw_msg):
     st.write("Body")
     st.write(f'Body: {msg_file.body}')
     
+    body = msg_file.body
     msg_file.close()
 
     # Extract email body for input into the LLM.
-    return msg_file.body
+    return body, email_elements
