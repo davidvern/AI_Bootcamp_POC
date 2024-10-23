@@ -1,7 +1,7 @@
 # Set up and run this Streamlit App
 import streamlit as st
 from helper_functions import llm # <--- This is the helper function that we have created 🆕
-from water_quality_query_handler import process_user_message_wq
+from logics.water_quality_query_handler_matthew import process_user_message_wq
 
 # region <--------- Streamlit App Configuration --------->
 st.set_page_config(
