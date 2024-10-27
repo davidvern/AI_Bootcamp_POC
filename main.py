@@ -46,7 +46,7 @@ if input_method == "Text Input":
     # Create input are for email body
     text_input = st.text_area("Paste the content of the email below.", height = 300)    
     if st.button('Submit',type="primary"):
-        public_query = text_import(text_input)
+        public_query, email_elements = text_import(text_input)
         st.session_state.llm_trigger = True
     else:
          st.warning("Please provide an input before submitting")
@@ -54,7 +54,7 @@ else:
     # if opt for .msg input
     email_input = st.file_uploader('Please upload an email message to submit')
     if email_input is not None:
-        public_query = email_msg_import(email_input)
+        public_query, email_elements = email_msg_import(email_input)
         st.session_state.llm_trigger = True
 
 if st.session_state.llm_trigger:

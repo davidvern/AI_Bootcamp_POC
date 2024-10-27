@@ -9,7 +9,7 @@ from langchain.chains import RetrievalQA
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
+from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, PromptTemplate
 
 
 def create_pub_faq_json():
@@ -88,7 +88,7 @@ def create_pub_faq_vectordb():
     print(f'Vector data base created with number of chunks = {vectordb._collection.count()}')
     return vectordb
 
-def product_claim_query_handler(public_query):
+def final_production_claim_response(public_query):
 
     # Create embeddings model
     embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)    
@@ -101,7 +101,6 @@ def product_claim_query_handler(public_query):
         root_dir = os.path.dirname(current_dir)
         # construct path to the vectordb folder
         persist_directory = os.path.join(root_dir,'data\\PUB_FAQ_collection')
-
         vector_store = Chroma(
             persist_directory=persist_directory,
             collection_name='PUB_FAQ_collection',
@@ -111,38 +110,55 @@ def product_claim_query_handler(public_query):
         print('PUB FAQ vectordb not found. Proceeding to create vector database')
         print('Checking for presence of PUB FAQ JSON to create vector database')
 
+        # check for the presence of the json file.
         if os.path.isfile('data\\pub_site_faq.json'):
             print('PUB FAQ JSON file exists. Proceeding to load...')
         else: 
             print('PUB FAQ JSON file not found. Proceeding with creation through website scrapping')
             create_pub_faq_json()    
-
-        create_pub_faq_vectordb()
-
-    # check for the presence of the json file.
-
+        vector_store = create_pub_faq_vectordb() 
 
     # Proceeding to create RetrievalQA
     llm = ChatOpenAI(model='gpt-4o-mini', temperature=0, seed=42)
 
     # Build prompt
     # delimiter = "###"
-    system_prompt = SystemMessagePromptTemplate.from_template("""You are a customer service representative. 
-    Use the given context to answer public query delimited with a pair of '###' delimiters.
-    If you don't know the answer, please indicate as such. Keep the answer as concise as possbile.
-    {context}
-    Question: ###{question}###
-    Helpful Answer:
-    """)
-    human_message = HumanMessagePromptTemplate.from_template("{question}")
-    prompt = ChatPromptTemplate.from_messages([system_prompt, human_message])
+    # system_prompt = SystemMessagePromptTemplate.from_template("""You are a customer service representative. 
+    # Use the given context to answer public query delimited with a pair of '###' delimiters.
+    # If you don't know the answer, please indicate as such. Keep the answer as concise as possible.
+    # {context}
+    # Question: ###{question}###
+    # Helpful Answer:
+    # """)
+    # human_message = HumanMessagePromptTemplate.from_template("{question}")
+    # prompt = ChatPromptTemplate.from_messages([system_prompt, human_message])
     
-    qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        retriever = vector_store.as_retriever(),
-        chain_type_kwargs ={"prompt": prompt}
-    )
+    # qa_chain = RetrievalQA.from_chain_type(
+    #     llm=llm,
+    #     retriever = vector_store.as_retriever(),
+    #     chain_type_kwargs ={"prompt": prompt}
+    # )
+    # print('code stopped at line 145')
+    # response = qa_chain.invoke(public_query)
+    # print('code stopped at line 146')
+    # product_claim_query_response = response["result"]
 
-    response = qa_chain(public_query)
+    template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, 
+    just say that you don't know, don't try to make up an answer. Cite the relevant sections where possible. Keep the 
+    answer as concise as possible.
+    {context}
+    Question: {question}
+    Helpful Answer:"""
+    QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
+
+    # Run chain
+    qa_chain2 = RetrievalQA.from_chain_type(
+        ChatOpenAI(model='gpt-4o-mini'),
+        retriever=vector_store.as_retriever(k=10),
+        return_source_documents=True, # Make inspection of document possible in debug
+        chain_type_kwargs={"prompt": QA_CHAIN_PROMPT}
+    )
+    response = qa_chain2.invoke(public_query)
     product_claim_query_response = response["result"]
+
     return product_claim_query_response

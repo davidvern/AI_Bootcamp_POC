@@ -8,7 +8,7 @@
 import json
 from helper_functions import llm
 from logics.water_quality_query_handler_matthew import process_user_message_wq
-from logics.product_claim_query_handler import product_claim_query_handler
+from logics.product_claim_query_handler import final_production_claim_response
 
 def initial_response(public_query):
     # The role of this function is to take in the public_query (in the context of this script, it is the body of the email query).
@@ -62,7 +62,7 @@ def intermediate_response(public_query,query_category_result):
 
     if query_category_result['product claim']:
         print('True for product claim query')
-        product_claim_response = product_claim_query_handler(public_query)
+        product_claim_response = final_production_claim_response(public_query)
         
     return water_quality_response, water_testing_response, product_claim_response
 
@@ -87,12 +87,37 @@ def water_testing_query_handler(public_query):
     water_testing_query_response = llm.get_completion_by_messages(messages)
     return water_testing_query_response
 
+def response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response,public_query):
+    delimiter = "###"
+    system_message = f"""
+    You are a customer service AI tasked with consolidating the response from various individual department to formulate a respose to customer queries. Follow these instructions precisely:
+
+    1. The public's query will be delimited by `{delimiter}`.
+
+    2. The response to the public's query will based the inputs from {water_quality_response}, {water_testing_response} and {product_claim_response}. If any of these inputs are {None}, 
+    ignore it. This means that the category is not relevant. The inputs will consolidated to address the public's query.
+
+    3. The response will be in the form of a reply email in a corporate tone. 
+    """
+    messages = [
+        {'role': 'system',
+         'content': system_message},
+         {'role': 'user',
+          'content': f"{delimiter}{public_query}{delimiter}"},
+    ]
+
+    final_email_reply = llm.get_completion_by_messages(messages)
+    
+    return final_email_reply
+
 def full_worflow(public_query):
     
     query_category = initial_response(public_query)
 
-    a,b,c = intermediate_response(public_query,query_category)
-    # water_quality_response, water_testing_response, product_claim_response = intermediate_response(public_query,query_category)
-    # final_response = response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response)
-   
-    return [a,b,c]
+    water_quality_response, water_testing_response, product_claim_response = intermediate_response(public_query,query_category)
+
+    final_response = response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response,public_query)
+    return final_response
+    
+    # a,b,c = intermediate_response(public_query,query_category)  
+    # return [a,b,c]
