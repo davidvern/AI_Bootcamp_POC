@@ -35,14 +35,20 @@ def get_completion(prompt, model="gpt-4o-mini", temperature=0, top_p=1.0, max_to
     return response.choices[0].message.content
 
 # Note that this function directly take in "messages" as the parameter.
-def get_completion_by_messages(messages, model="gpt-4o-mini", temperature=0, top_p=1.0, max_tokens=1024, n=1):
+def get_completion_by_messages(messages, model="gpt-4o-mini", temperature=0, top_p=1.0, max_tokens=1024, n=1, json_output=False):
+    if json_output == True:
+      output_json_structure = {"type": "json_object"}
+    else:
+      output_json_structure = None
+
     response = client.chat.completions.create(
         model=model,
         messages=messages,
         temperature=temperature,
         top_p=top_p,
         max_tokens=max_tokens,
-        n=1
+        n=1,
+        response_format=output_json_structure
     )
     return response.choices[0].message.content
 

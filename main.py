@@ -4,7 +4,7 @@ import streamlit as st
 from helper_functions.utility import text_import 
 from helper_functions.utility import email_msg_import
 from helper_functions.utility import check_password
-from logics.email_query_handler import initial_response
+from logics.email_query_handler import full_worflow
 
 # from logics.custom_query_handler import process_user_message  # placeholder to import logics function
 
@@ -58,5 +58,5 @@ else:
         st.session_state.llm_trigger = True
 
 if st.session_state.llm_trigger:
-    response = initial_response(public_query)   
+    response = full_worflow(public_query)   
     st.write(response)
