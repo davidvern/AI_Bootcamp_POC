@@ -21,7 +21,7 @@ if os.path.exists('data\\basic_chroma_langchain_db'):
    print('Loading existing vector database.')
 else:
    import rag_prep
-   print('Vector database directory not found, proceeding to create vector datase.')
+   print('Vector database directory not found, proceeding to create vector database.')
    rag_prep.main()
 
 ## Load vector database from persistent directory
