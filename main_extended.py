@@ -4,7 +4,7 @@ import streamlit as st
 from helper_functions.utility import text_import 
 from helper_functions.utility import email_msg_import
 from helper_functions.utility import check_password
-from logics.water_quality_query_handler_matthew import process_user_message_wq
+from logics.email_query_handler import full_worflow
 import io
 import email
 
@@ -67,7 +67,7 @@ elif st.session_state.page == 'output':
     st.write(st.session_state.public_query)
     
     st.subheader("Generated Response:")
-    response = process_user_message_wq(st.session_state.public_query)
+    response = full_worflow(st.session_state.public_query)
     st.write(response)
     
     # if st.button('Generate Email Template'):
