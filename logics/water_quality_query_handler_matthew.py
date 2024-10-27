@@ -79,7 +79,7 @@ def email_vectordb_acquire():
         )
         print('Vectordb loaded successfully!')
     else:
-        print('Vector database directory not found, proceeding to create vector datase.')
+        print('Vector database directory not found, proceeding to create vector database.')
         vectordb = create_email_vectordb(embeddings_model)
 
     return vectordb
