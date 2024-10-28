@@ -88,6 +88,7 @@ def water_testing_query_handler(public_query):
     return water_testing_query_response
 
 def response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response,public_query):
+    print('Individual queries completed. Now consolidating...')
     delimiter = "###"
     system_message = f"""
     You are a customer service AI tasked with consolidating the response from various individual department to formulate a respose to customer queries. Follow these instructions precisely:
@@ -110,7 +111,7 @@ def response_consolidation(query_category,water_quality_response, water_testing_
     
     return final_email_reply
 
-def full_worflow(public_query):
+def full_workflow(public_query):
     
     query_category = initial_response(public_query)
 
@@ -118,6 +119,3 @@ def full_worflow(public_query):
 
     final_response = response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response,public_query)
     return final_response
-    
-    # a,b,c = intermediate_response(public_query,query_category)  
-    # return [a,b,c]

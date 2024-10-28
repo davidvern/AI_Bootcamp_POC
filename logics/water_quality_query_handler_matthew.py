@@ -62,7 +62,7 @@ def email_vectordb_acquire():
 
     # Create embeddings model
     embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
-    # checks for presence of email_semantic vectordb
+    # check for presence of email_semantic vectordb
     if os.path.exists('data\\vectordb_email_semantic'):
         print('VectorDB found, now loading existing vector database...')
         # Obtain current script's directory
@@ -77,7 +77,7 @@ def email_vectordb_acquire():
             collection_name='email_semantic',
             embedding_function=embeddings_model
         )
-        print('Vectordb loaded successfully!')
+        print('email_semantic vectordb loaded successfully!')
     else:
         print('Vector database directory not found, proceeding to create vector datase.')
         vectordb = create_email_vectordb(embeddings_model)
