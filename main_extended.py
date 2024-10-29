@@ -1,10 +1,8 @@
 # main file to be run by streamlit.
 # Set up and run this Streamlit App
 import streamlit as st
-from helper_functions.utility import text_import 
-from helper_functions.utility import email_msg_import
-from helper_functions.utility import check_password
-from logics.water_quality_query_handler_matthew import process_user_message_wq
+from helper_functions.utility import text_import, email_msg_import, check_password
+from logics.email_query_handler import full_workflow
 import io
 import email
 
@@ -21,8 +19,12 @@ if not check_password():
 
 ## WHAT IS SHOWN ON THE APP STARTS FROM HERE!!!!
 
+# Initialize the session state for page navigation and inputs
 if 'page' not in st.session_state:
     st.session_state.page = 'input'
+
+if 'response' not in st.session_state:
+    st.session_state.response = None
 
 if st.session_state.page == 'input':
     st.title("Water Quality Email Response Generator")
@@ -41,34 +43,45 @@ if st.session_state.page == 'input':
 
     input_method = st.radio("Choose input method: ", ("Text Input", "Email Upload (.msg file):"))
 
+    # Define a function to handle generating response on button click or file upload
+    def generate_response(content): 
+        # function is only triggered when the submit button or the email file is uploaded. 
+        public_query, email_elements = content
+        st.session_state.public_query = public_query
+        st.session_state.email_elements = email_elements
+        with st.spinner("Generating response..."):
+            st.session_state.response = full_workflow(st.session_state.public_query)
+        st.session_state.page = 'output'
+        st.rerun()
+
+    # Text Input Method
     if input_method == "Text Input":
-        text_input = st.text_area("Paste the content of the email below.", height = 300)    
+        text_input = st.text_area("Paste the content of the email below.", height=300)
+        
+        # Only trigger full_workflow if the Submit button is clicked and input is provided
         if st.button('Submit', type="primary"):
-            public_query, email_elements = text_import(text_input)
-            st.session_state.public_query = public_query
-            st.session_state.email_elements = email_elements
-            st.session_state.page = 'output'
-            st.rerun()
-        else:
-             st.warning("Please provide an input before submitting")
-    else: 
+            if text_input:
+                generate_response(text_import(text_input))
+            else:
+                st.warning("Please provide an input before submitting")
+
+    # Email Upload Method
+    else:
         email_input = st.file_uploader('Please upload an email message to submit')
+        
+        # Trigger full_workflow as soon as an email is uploaded
         if email_input is not None:
-            public_query, email_elements = email_msg_import(email_input)
-            st.session_state.public_query = public_query
-            st.session_state.email_elements = email_elements
-            st.session_state.page = 'output'
-            st.rerun()
+            generate_response(email_msg_import(email_input))
+
 
 elif st.session_state.page == 'output':
     st.title("Email Content and Response")
     
+    st.subheader("Generated Response:")
+    st.write(st.session_state.response)
+
     st.subheader("Original Email Content:")
     st.write(st.session_state.public_query)
-    
-    st.subheader("Generated Response:")
-    response = process_user_message_wq(st.session_state.public_query)
-    st.write(response)
     
     # if st.button('Generate Email Template'):
     #     st.session_state.response = response
@@ -77,4 +90,5 @@ elif st.session_state.page == 'output':
     
     if st.button('Back to Input'):
         st.session_state.page = 'input'
+        st.session_state.response = None  # Clear the response
         st.rerun()

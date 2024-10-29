@@ -4,7 +4,7 @@ import streamlit as st
 from helper_functions.utility import text_import 
 from helper_functions.utility import email_msg_import
 from helper_functions.utility import check_password
-from logics.email_query_handler import initial_response
+from logics.email_query_handler import full_worflow
 
 # from logics.custom_query_handler import process_user_message  # placeholder to import logics function
 
@@ -46,7 +46,7 @@ if input_method == "Text Input":
     # Create input are for email body
     text_input = st.text_area("Paste the content of the email below.", height = 300)    
     if st.button('Submit',type="primary"):
-        public_query = text_import(text_input)
+        public_query, email_elements = text_import(text_input)
         st.session_state.llm_trigger = True
     else:
          st.warning("Please provide an input before submitting")
@@ -54,9 +54,9 @@ else:
     # if opt for .msg input
     email_input = st.file_uploader('Please upload an email message to submit')
     if email_input is not None:
-        public_query = email_msg_import(email_input)
+        public_query, email_elements = email_msg_import(email_input)
         st.session_state.llm_trigger = True
 
 if st.session_state.llm_trigger:
-    response = initial_response(public_query)   
+    response = full_worflow(public_query)   
     st.write(response)
