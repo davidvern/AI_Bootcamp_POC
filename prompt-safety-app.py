@@ -3,56 +3,59 @@ import re
 import html
 from typing import List, Dict, Optional
 
-class PromptSafetyChecker:
-    def __init__(self):
-        # Common prompt injection patterns
-        self.suspicious_patterns = [
-            r"ignore previous instructions",
-            r"disregard (?:all )?(?:previous )?(?:instructions|prompts)",
-            r"forget (?:all )?(?:previous )?(?:instructions|prompts)",
-            r"new instruction:",
-            r"system prompt:",
-            r"you are now",
-            r"act as",
-            r"<\/?[a-z][\s\S]*>",  # HTML/XML tags
-            r"\[.*?\]\(.*?\)",      # Markdown links
-            r"```.*?```",           # Code blocks
-        ]
+
+from helper_functions.prompt_safety_app_security import PromptSafetyChecker
+
+# class PromptSafetyChecker:
+#     def __init__(self):
+#         # Common prompt injection patterns
+#         self.suspicious_patterns = [
+#             r"ignore previous instructions",
+#             r"disregard (?:all )?(?:previous )?(?:instructions|prompts)",
+#             r"forget (?:all )?(?:previous )?(?:instructions|prompts)",
+#             r"new instruction:",
+#             r"system prompt:",
+#             r"you are now",
+#             r"act as",
+#             r"<\/?[a-z][\s\S]*>",  # HTML/XML tags
+#             r"\[.*?\]\(.*?\)",      # Markdown links
+#             r"```.*?```",           # Code blocks
+#         ]
         
-        # Maximum allowed input length
-        self.max_input_length = 1000
+#         # Maximum allowed input length
+#         self.max_input_length = 1000
         
-        # Keep track of user inputs for rate limiting
-        self.user_inputs: Dict[str, List[float]] = {}
+#         # Keep track of user inputs for rate limiting
+#         self.user_inputs: Dict[str, List[float]] = {}
         
-    def sanitize_input(self, text: str) -> str:
-        """Sanitize user input by escaping special characters."""
-        # HTML escape to prevent XSS
-        text = html.escape(text)
-        # Remove any control characters
-        text = ''.join(char for char in text if ord(char) >= 32)
-        return text.strip()
+#     def sanitize_input(self, text: str) -> str:
+#         """Sanitize user input by escaping special characters."""
+#         # HTML escape to prevent XSS
+#         text = html.escape(text)
+#         # Remove any control characters
+#         text = ''.join(char for char in text if ord(char) >= 32)
+#         return text.strip()
     
-    def check_suspicious_patterns(self, text: str) -> List[str]:
-        """Check for suspicious patterns that might indicate prompt injection attempts."""
-        findings = []
-        for pattern in self.suspicious_patterns:
-            if re.search(pattern, text, re.IGNORECASE):
-                findings.append(f"Suspicious pattern detected: {pattern}")
-        return findings
+#     def check_suspicious_patterns(self, text: str) -> List[str]:
+#         """Check for suspicious patterns that might indicate prompt injection attempts."""
+#         findings = []
+#         for pattern in self.suspicious_patterns:
+#             if re.search(pattern, text, re.IGNORECASE):
+#                 findings.append(f"Suspicious pattern detected: {pattern}")
+#         return findings
     
-    def validate_input(self, text: str) -> tuple[bool, Optional[str]]:
-        """Validate user input for potential security issues."""
-        # Check input length
-        if len(text) > self.max_input_length:
-            return False, f"Input exceeds maximum length of {self.max_input_length} characters"
+#     def validate_input(self, text: str) -> tuple[bool, Optional[str]]:
+#         """Validate user input for potential security issues."""
+#         # Check input length
+#         if len(text) > self.max_input_length:
+#             return False, f"Input exceeds maximum length of {self.max_input_length} characters"
         
-        # Check for suspicious patterns
-        findings = self.check_suspicious_patterns(text)
-        if findings:
-            return False, "Potential prompt injection detected:\n" + "\n".join(findings)
+#         # Check for suspicious patterns
+#         findings = self.check_suspicious_patterns(text)
+#         if findings:
+#             return False, "Potential prompt injection detected:\n" + "\n".join(findings)
         
-        return True, None
+#         return True, None
 
 def main():
     st.title("Secure Prompt Input System")

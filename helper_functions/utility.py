@@ -3,6 +3,7 @@ import hmac
 import extract_msg
 import email
 import io
+import hashlib
 
 # """  
 # This file contains the common components used in the Streamlit App.  
@@ -93,3 +94,6 @@ def email_msg_import(raw_msg):
 
     # Extract email body for input into the LLM.
     return body, email_elements
+
+def generate_checksum(query):
+    return hashlib.md5(query.encode()).hexdigest()[:8]
