@@ -7,7 +7,7 @@
 
 import json
 from helper_functions import llm
-from logics.water_quality_query_handler_matthew import process_user_message_wq
+from logics.water_quality_query_handler import process_user_message_wq, vectordb_acquire
 from logics.product_claim_query_handler import final_production_claim_response
 
 def initial_response(public_query):
@@ -94,6 +94,11 @@ def water_testing_query_handler(public_query):
 
 def response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response,public_query):
     print('Individual queries completed. Now consolidating...')
+
+    # run quick similarity search to return some relevant email chunks.
+    vectordb = vectordb_acquire("vectordb_email_semantic")
+    email_reference = vectordb.similarity_search_with_relevance_scores(public_query, k=4)
+
     delimiter = "###"
     system_message = f"""
     You are a customer service AI tasked with consolidating the response from various individual department to formulate a respose to customer queries. Follow these instructions precisely:
@@ -103,7 +108,7 @@ def response_consolidation(query_category,water_quality_response, water_testing_
     2. The response to the public's query will based the inputs from {water_quality_response}, {water_testing_response} and {product_claim_response}. If any of these inputs are {None}, 
     ignore it. This means that the category is not relevant. The inputs will consolidated to address the public's query.
 
-    3. The response will be in the form of a reply email in a corporate tone. 
+    3. The response will be in the form of a reply email in a corporate tone. Take reference from the writing style used in {email_reference}.
     """
     messages = [
         {'role': 'system',
