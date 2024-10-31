@@ -26,6 +26,12 @@ if 'page' not in st.session_state:
 if 'response' not in st.session_state:
     st.session_state.response = None
 
+if 'name_input' not in st.session_state:
+    st.session_state.name_input = '[Officer Name]'
+
+if 'designation_input' not in st.session_state:
+    st.session_state.designation_input = '[Designation]'
+
 if st.session_state.page == 'input':
     st.title("Water Quality Email Response Generator")
 
@@ -38,8 +44,14 @@ if st.session_state.page == 'input':
         Always consult with qualified professionals for accurate and personalized advice.
         ''')
 
-    name_input = st.text_input("Please enter name and designation for email sign-off")
-    st.session_state.name_input = name_input
+    name_input = st.text_input("Please enter name for email sign-off")
+    designation_input = st.text_input("Please enter designation for email sign-off")
+
+    if name_input:
+        st.session_state.name_input = name_input
+
+    if designation_input:
+        st.session_state.designation_input = designation_input
 
     input_method = st.radio("Choose input method: ", ("Text Input", "Email Upload (.msg file):"))
 
@@ -50,7 +62,7 @@ if st.session_state.page == 'input':
         st.session_state.public_query = public_query
         st.session_state.email_elements = email_elements
         with st.spinner("Generating response..."):
-            st.session_state.response = full_workflow(st.session_state.public_query)
+            st.session_state.response = full_workflow(st.session_state.public_query,st.session_state.email_elements)
         st.session_state.page = 'output'
         st.rerun()
 
@@ -78,17 +90,19 @@ elif st.session_state.page == 'output':
     st.title("Email Content and Response")
     
     st.subheader("Generated Response:")
+    st.write('To: ',st.session_state.email_elements.get('From'))
+    st.write('CC: ',st.session_state.email_elements.get('CC'))
     st.write(st.session_state.response)
-
+    st.write(st.session_state.name_input)
+    st.write(st.session_state.designation_input)
+    
     st.subheader("Original Email Content:")
     st.write(st.session_state.public_query)
-    
-    # if st.button('Generate Email Template'):
-    #     st.session_state.response = response
-    #     st.session_state.page = 'download'
-    #     st.rerun()
-    
+  
     if st.button('Back to Input'):
+        st.session_state.name_input = '[Officer Name]'
+        st.session_state.designation_input = '[Designation]'
         st.session_state.page = 'input'
         st.session_state.response = None  # Clear the response
         st.rerun()
+
