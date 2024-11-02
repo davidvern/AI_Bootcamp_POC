@@ -46,6 +46,7 @@ def create_email_vectordb(embeddings_model):
     text_splitter = SemanticChunker(embeddings_model)
 # Split the documents into smaller chunks
     splitted_documents = text_splitter.split_documents(list_of_emails)
+    print(f'Number of document chunks: {len(splitted_documents)}')
 # Create Vector Database
     vectordb = Chroma.from_documents(
         filter_complex_metadata(splitted_documents),
@@ -53,7 +54,7 @@ def create_email_vectordb(embeddings_model):
         collection_name='email_semantic', 
         persist_directory='data/vectordb_email_semantic' # define location directory to save the vectordb
     ) 
-    
+    print(f"Vectorstore collection count: {len(vectordb.get()['documents'])}")
     # return vectordb to be used
     return vectordb
 
