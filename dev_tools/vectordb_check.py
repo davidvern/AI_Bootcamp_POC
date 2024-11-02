@@ -4,20 +4,18 @@ from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
 import chromadb
 
-script_path = os.path.dirname(os.path.abspath(__file__))
-root_dir = os.path.dirname(script_path)
+script_path = os.path.dirname(os.path.abspath(__file__)) # current directory
+root_dir = os.path.dirname(script_path) # one level higher
+embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
+persist_directory = os.path.join(root_dir,'data\\vectordb_email_semantic') #navigate over to data folder
 
-persist_directory = os.path.join(root_dir,'data\\basic_chroma_langchain_db')
+vectordb = Chroma(
+    persist_directory=persist_directory,
+    collection_name="email_semantic",
+    embedding_function=embeddings_model
+)
 
-result = os.path.exists(persist_directory)
-print(result)
-
-client = chromadb.PersistentClient(path=persist_directory) #create chromadb from scratch
-# check for presence of collection
-coll = client.list_collections() # produces a list of chromadb.api.models.Collection.Collection
-print(type(coll)) # list
-
-print(client.get_collection('WQ_reference_material'))
+print(f"Vectorstore collection count: {len(vectordb.get()['documents'])}")
 
 # logic flow for multi database 
 # check for presence of directory, if exists probe further for collection, if it doesn't create the vectordb 
