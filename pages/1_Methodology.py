@@ -2,4 +2,10 @@
 import streamlit as st
 
 st.title("Methodology")
-st.write("This is a placeholder for the methodology. Here, you could provide details about the program, including objectives, scope, and any other relevant information.")
+st.subheader("Data Flow Chart")
+st.write("The below chart illustrates how infomation is processed within the application framework.")
+st.image('data/Information_page/Data_Flow.png')
+
+st.subheader("Application Processes")
+st.write("The below chart illustrates the core processes of the AI Chatbot application, mainly: \n 1) Retrieve WQ & Regulatory Information \n 2) Generate Responses to Email Queries")
+st.image('data/Information_page/Application_Flow.png')
