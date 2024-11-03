@@ -4,21 +4,30 @@ from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
 import chromadb
 
+embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
+
 script_path = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.dirname(script_path)
+email_persist_directory = os.path.join(root_dir,'data\\vectordb_email_semantic')
+if os.path.exists(email_persist_directory):
+    print(f'vectordb_email_semantic exists')
+    vectordb_email= Chroma(
+        persist_directory=email_persist_directory,
+        collection_name='email_semantic',
+        embedding_function=embeddings_model
+    )
+    print(f'Collection count = {len(vectordb_email.get()["documents"])}') # Should be 267
+else:
+    print(f'vectordb_email_semantic does not exist')
 
-persist_directory = os.path.join(root_dir,'data\\basic_chroma_langchain_db')
-
-result = os.path.exists(persist_directory)
-print(result)
-
-client = chromadb.PersistentClient(path=persist_directory) #create chromadb from scratch
-# check for presence of collection
-coll = client.list_collections() # produces a list of chromadb.api.models.Collection.Collection
-print(type(coll)) # list
-
-print(client.get_collection('WQ_reference_material'))
-
-# logic flow for multi database 
-# check for presence of directory, if exists probe further for collection, if it doesn't create the vectordb 
-# if 
+PUBFAQ_persist_directory = os.path.join(root_dir,'data\\PUB_FAQ_collection')
+if os.path.exists(email_persist_directory):
+    print(f'PUB_FAQ Collection exists')
+    vectordb_faq = Chroma(
+        persist_directory=PUBFAQ_persist_directory,
+        collection_name='PUB_FAQ_collection',
+        embedding_function=embeddings_model
+    )
+    print(f'Collection count = {len(vectordb_faq.get()["documents"])}') # Should be 99
+else:
+    print(f'PUB_FAQ_collection does not exist')
