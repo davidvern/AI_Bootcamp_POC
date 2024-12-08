@@ -13,7 +13,12 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import OutlookMessageLoader
 from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain.chains import RetrievalQA
+from langchain.chains import RetrievalQA, create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain.chains.combine_documents import create_stuff_documents_chain
 
 # Import the data file in csv format
 import pandas as pd
@@ -26,6 +31,8 @@ parameter_list = water_quality_df['Parameter List'].tolist()
 # user_input = 'What is the pH and colour in PUB water?'
 
 # Supporting functions
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
 
 # Creation of vectordb
 def create_email_vectordb(embeddings_model):
@@ -50,34 +57,35 @@ def create_email_vectordb(embeddings_model):
     vectordb = Chroma.from_documents(
         filter_complex_metadata(splitted_documents),
         embedding=embeddings_model, 
-        collection_name='email_semantic', 
-        persist_directory='data/vectordb_email_semantic' # define location directory to save the vectordb
+        collection_name='email_semantic_80', 
+        persist_directory='data/vectordb_email_semantic_80' # define location directory to save the vectordb
     ) 
     
     # return vectordb to be used
     return vectordb
 
 # Checking for presence of vectordb, spun off as a separate function as it is used on Step 3 and 4.
-def email_vectordb_acquire():
+def email_vectordb_acquire(vectorstore_name):
 
     # Create embeddings model
     embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
     # check for presence of email_semantic vectordb
-    if os.path.exists('data\\vectordb_email_semantic'):
+    vectorstore_path = "data\\vectordb_" + vectorstore_name
+    if os.path.exists(vectorstore_path):
         print('VectorDB found, now loading existing vector database...')
         # Obtain current script's directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
         # Go up one level to main directory
         root_dir = os.path.dirname(current_dir)
         # construct path to the vectordb folder
-        persist_directory = os.path.join(root_dir,'data\\vectordb_email_semantic')
+        persist_directory = os.path.join(root_dir,vectorstore_path)
 
         vectordb = Chroma(
             persist_directory=persist_directory,
-            collection_name='email_semantic',
+            collection_name=vectorstore_name,
             embedding_function=embeddings_model
         )
-        print('email_semantic vectordb loaded successfully!')
+        print(f'{vectorstore_name} vectordb loaded successfully!')
     else:
         print('Vector database directory not found, proceeding to create vector database.')
         vectordb = create_email_vectordb(embeddings_model)
@@ -129,16 +137,46 @@ def get_water_quality_guidelines(list_of_water_quality_parameters: list):
 
 def extract_email_information(user_message):
     # Check for presence of vectordb
-    vectordb = email_vectordb_acquire()
+    vectordb = email_vectordb_acquire("email_semantic_80")
 
     # llm to be used in RAG pipeplines in this notebook
-    llm = ChatOpenAI(model='gpt-4o-mini', temperature=0, seed=42)
+    llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
+    print('code has cleared line 1')
 
-    # Create RAG Chain
-    retriever_chain_from_llm = RetrievalQA.from_llm(
-        retriever=vectordb.as_retriever(), llm=llm
+    # # Existing RAG Chain
+    # retriever_chain_from_llm = RetrievalQA.from_llm(
+    #     retriever=vectordb.as_retriever(), llm=llm
+    # )
+    # output_step_3 = retriever_chain_from_llm.invoke(user_message)
+
+    # New Rag Chain Construction
+
+    retriever = vectordb.as_retriever(k=4)
+    print('code has cleared line 2')
+    # docs = retriever.invoke(user_message)
+    system_prompt = ("""
+        You are an assistant for question-answering tasks.
+        Use the following pieces of retrieved context to answer
+        the question. If you don't know the answer, say that you
+        don't know.
+        \n\n
+        {context} 
+    """)
+    print('code has cleared line 3')
+
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", system_prompt),
+            ("human", "{input}"),
+        ]
     )
-    output_step_3 = retriever_chain_from_llm.invoke(user_message)
+    print('code has cleared line 4')
+    question_answer_chain = create_stuff_documents_chain(llm, prompt)
+    rag_chain = create_retrieval_chain(retriever, question_answer_chain)
+    print('code has cleared line 5')
+    response = rag_chain.invoke({"input": user_message})
+    output_step_3 = response["answer"]
+    print('code has cleared line 6')
     return output_step_3
 
     # result_step_3 = extract_email_information(user_input)
@@ -147,7 +185,7 @@ def extract_email_information(user_message):
 
 def get_email_records(user_message):
     # Check for presence of vectordb
-    vectordb = email_vectordb_acquire()
+    vectordb = email_vectordb_acquire('email_semantic_80')
 
     output_step_4 = vectordb.similarity_search_with_relevance_scores(user_message, k=4)
     return output_step_4

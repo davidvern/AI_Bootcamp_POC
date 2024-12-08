@@ -64,6 +64,28 @@ def text_import(text_input):
     # Extract email body for input into the LLM. 
     return body, email_elements
 
+def text_import_vs(text_input):
+    input_msg = email.message_from_string(text_input)
+
+    email_elements = {
+        'Subject': input_msg.get('Subject', 'N/A'),
+        'From': input_msg.get('From', 'N/A'),
+        'To': input_msg.get('To', 'N/A'),
+        'CC': input_msg.get('CC', 'N/A'),
+        'Date': input_msg.get('Date', 'N/A')
+    }
+
+    print_header_if_exists(input_msg, 'Subject')
+    print_header_if_exists(input_msg, 'From')
+    print_header_if_exists(input_msg, 'To')
+    print_header_if_exists(input_msg, 'CC')
+    print_header_if_exists(input_msg, 'Date')
+
+    body = input_msg.get_payload(decode=True).decode()
+  
+    # Extract email body for input into the LLM. 
+    return body, email_elements
+
 
 def email_msg_import(raw_msg):
     # reading the file

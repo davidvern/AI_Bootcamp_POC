@@ -120,7 +120,7 @@ def water_testing_query_handler(public_query):
 def response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response,public_query,email_elements):
     print('Individual queries completed. Now consolidating...')
     # Check for presence of vectordb
-    vectordb = email_vectordb_acquire()
+    vectordb = email_vectordb_acquire("email_semantic_80")
     email_reference = vectordb.similarity_search_with_relevance_scores(public_query, k=4)
 
     delimiter = "###"

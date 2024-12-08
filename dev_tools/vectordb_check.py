@@ -1,4 +1,7 @@
 # This python serves as test area for various mechanisms to check for the presence of vector DBs
+
+# testing vectordbs
+
 import os
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings

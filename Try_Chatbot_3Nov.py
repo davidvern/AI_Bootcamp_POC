@@ -2,7 +2,7 @@
 # Set up and run this Streamlit App
 import streamlit as st
 from helper_functions.utility import text_import, email_msg_import, check_password
-from email_query_handler import full_workflow
+from logics.email_query_handler import full_workflow
 import io
 import email
 
@@ -107,4 +107,3 @@ elif st.session_state.page == 'output':
         st.session_state.page = 'input'
         st.session_state.response = None  # Clear the response
         st.rerun()
-
