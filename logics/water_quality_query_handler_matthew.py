@@ -4,6 +4,8 @@
 # 3. Extract information from previous email archives
 # 4. generate_response_based_on_water_quality_standards
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
 from helper_functions import llm
 from helper_functions.llm import get_completion_by_messages
 import os
@@ -44,6 +46,7 @@ def create_email_vectordb(embeddings_model):
 
     for filename in directory:
         filename = "data" + '/' + 'Queries Received and Email Responses' + '/' + filename
+        logging.info(filename)
         loader = OutlookMessageLoader(filename)
         text_from_file = loader.load()
         # append the text from the single file to the existing list
@@ -54,6 +57,7 @@ def create_email_vectordb(embeddings_model):
 # Split the documents into smaller chunks
     splitted_documents = text_splitter.split_documents(list_of_emails)
 # Create Vector Database
+# filter_complex_metadata(splitted_documents)
     vectordb = Chroma.from_documents(
         filter_complex_metadata(splitted_documents),
         embedding=embeddings_model, 
@@ -136,33 +140,23 @@ def get_water_quality_guidelines(list_of_water_quality_parameters: list):
 #3. Extract information from previous email archives
 
 def extract_email_information(user_message):
-    # Check for presence of vectordb
+    
     vectordb = email_vectordb_acquire("email_semantic_80")
-
-    # llm to be used in RAG pipeplines in this notebook
     llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
-    print('code has cleared line 1')
-
-    # # Existing RAG Chain
-    # retriever_chain_from_llm = RetrievalQA.from_llm(
-    #     retriever=vectordb.as_retriever(), llm=llm
-    # )
-    # output_step_3 = retriever_chain_from_llm.invoke(user_message)
-
-    # New Rag Chain Construction
+    logging.debug("LLM initialized.")
 
     retriever = vectordb.as_retriever(k=4)
-    print('code has cleared line 2')
-    # docs = retriever.invoke(user_message)
-    system_prompt = ("""
+    logging.debug("Retriever initialized.")
+
+    system_prompt = """
         You are an assistant for question-answering tasks.
         Use the following pieces of retrieved context to answer
         the question. If you don't know the answer, say that you
         don't know.
         \n\n
         {context} 
-    """)
-    print('code has cleared line 3')
+    """
+    logging.debug("System prompt created.")
 
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -170,14 +164,20 @@ def extract_email_information(user_message):
             ("human", "{input}"),
         ]
     )
-    print('code has cleared line 4')
+    logging.debug("Prompt template created.")
+
     question_answer_chain = create_stuff_documents_chain(llm, prompt)
     rag_chain = create_retrieval_chain(retriever, question_answer_chain)
-    print('code has cleared line 5')
-    response = rag_chain.invoke({"input": user_message})
-    output_step_3 = response["answer"]
-    print('code has cleared line 6')
-    return output_step_3
+    logging.info("RAG chain created successfully.")
+
+    try:
+        logging.debug("Invoking RAG chain...")
+        response = rag_chain.invoke({"input": user_message})
+        logging.info("RAG chain invocation successful.")
+        return response["answer"]
+    except Exception as e:
+        logging.error(f"An error occurred during RAG chain invocation: {e}")
+        return None
 
     # result_step_3 = extract_email_information(user_input)
 
