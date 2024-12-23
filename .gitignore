@@ -30,3 +30,6 @@ data/vectordb_email_semantic
 data/PUB_FAQ_collection
 data/vectordb_wq_reference
 data/vectordb_email_semantic_80
+
+# log files
+log.log
