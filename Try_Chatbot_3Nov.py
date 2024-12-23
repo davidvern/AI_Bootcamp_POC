@@ -34,7 +34,7 @@ if 'designation_input' not in st.session_state:
 
 if st.session_state.page == 'input':
     # st.image("data/Information_page/PUB_logo.png")
-    st.logo("data/Information_page/PUB_logo.png")
+    # st.logo("data/Information_page/PUB_logo.png")
     st.title("Ask Your Question Here!")
     st.sidebar.title("Welcome to Water Quality Chatbot!")
     with st.expander('Click to see disclaimer'):

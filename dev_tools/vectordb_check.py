@@ -11,12 +11,12 @@ embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progre
 
 script_path = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.dirname(script_path)
-email_persist_directory = os.path.join(root_dir,'data\\vectordb_email_semantic')
+email_persist_directory = os.path.join(root_dir,'data\\vectordb_email_semantic_80')
 if os.path.exists(email_persist_directory):
     print(f'vectordb_email_semantic exists')
     vectordb_email= Chroma(
         persist_directory=email_persist_directory,
-        collection_name='email_semantic',
+        collection_name='email_semantic_80',
         embedding_function=embeddings_model
     )
     print(f'Collection count = {len(vectordb_email.get()["documents"])}') # Should be 267

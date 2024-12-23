@@ -5,7 +5,7 @@
 # 4. generate_response_based_on_water_quality_standards
 
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO, filename="log.log", filemode = 'w')
 from helper_functions import llm
 from helper_functions.llm import get_completion_by_messages
 import os
@@ -21,6 +21,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain.chains.combine_documents import create_stuff_documents_chain
+import chromadb
 
 # Import the data file in csv format
 import pandas as pd
@@ -56,8 +57,8 @@ def create_email_vectordb(embeddings_model):
     text_splitter = SemanticChunker(embeddings_model)
 # Split the documents into smaller chunks
     splitted_documents = text_splitter.split_documents(list_of_emails)
+    print(len(splitted_documents))
 # Create Vector Database
-# filter_complex_metadata(splitted_documents)
     vectordb = Chroma.from_documents(
         filter_complex_metadata(splitted_documents),
         embedding=embeddings_model, 
