@@ -7,7 +7,8 @@
 
 import json
 from helper_functions import llm
-from logics.water_quality_query_handler_matthew import process_user_message_wq, email_vectordb_acquire
+# from logics.water_quality_query_handler_matthew import process_user_message_wq, vectordb_acquire
+from logics.water_quality_query_handler import process_user_message_wq, vectordb_acquire
 from logics.product_claim_query_handler import final_production_claim_response
 
 def initial_response(public_query):
@@ -120,7 +121,7 @@ def water_testing_query_handler(public_query):
 def response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response,public_query,email_elements):
     print('Individual queries completed. Now consolidating...')
     # Check for presence of vectordb
-    vectordb = email_vectordb_acquire("email_semantic_80")
+    vectordb = vectordb_acquire("email_semantic_98")
     email_reference = vectordb.similarity_search_with_relevance_scores(public_query, k=4)
 
     delimiter = "###"
@@ -130,6 +131,7 @@ def response_consolidation(query_category,water_quality_response, water_testing_
     1. **Delimitation**: The public's query will be delimited by `{delimiter}`. Only content within these delimiters should be processed.
 
     2. **Input Handling**: The response to the public's query will be based on the inputs from {water_quality_response}, {water_testing_response}, and {product_claim_response}. 
+    - If water_quality_response contains tables, ensure these tables are included in the final response.
     - If any of these inputs are {None}, ignore that input as it indicates the category is not relevant.
     - Consolidate the relevant inputs to address the public's query comprehensively.
 

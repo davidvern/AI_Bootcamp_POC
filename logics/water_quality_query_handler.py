@@ -4,6 +4,9 @@
 # 3. Extract information from previous email archives
 # 4. generate_response_based_on_water_quality_standards
 
+import logging
+logging.basicConfig(level=logging.INFO, filename="log.log", filemode = 'w')
+
 from helper_functions import llm
 from helper_functions.llm import get_completion_by_messages
 import os
@@ -18,6 +21,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from helper_functions.llm import count_tokens
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
+import chromadb
 
 # Import the data file in csv format
 import pandas as pd
@@ -28,7 +32,8 @@ parameter_list = water_quality_df['Parameter List'].tolist()
 
 # Supporting functions
 # Creation of vectordb for email responses
-def create_email_vectordb(embeddings_model):
+def create_email_vectordb(embeddings_model,vectordb_name):
+    vectorstore_path = "data/vectordb_" + vectordb_name
     # Use .listdir() method to list all the files and directories of a specified location
     # Define directory for emails
     directory = os.listdir('data/Queries Received and Email Responses')
@@ -50,9 +55,9 @@ def create_email_vectordb(embeddings_model):
     vectordb = Chroma.from_documents(
         filter_complex_metadata(splitted_documents),
         embedding=embeddings_model, 
-        collection_name='email_semantic', 
-        persist_directory='data/vectordb_email_semantic' # define location directory to save the vectordb
-    )         
+        collection_name= vectordb_name, 
+        persist_directory= vectorstore_path # define location directory to save the vectordb
+    )
     return vectordb # return vectordb to be used
 
 def create_wq_reference_vectordb(embeddings_model):
@@ -108,11 +113,12 @@ def create_wq_reference_vectordb(embeddings_model):
 def vectordb_acquire(vectordb_name: str):
     # Create embeddings model
     embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
+    vectorstore_path = "data\\vectordb_" + vectordb_name
     # Create code to differentiate between the two vectordbs (vectordb_email_semantic and vectordb_reference) in this workflow
     match vectordb_name.lower():
-        case "vectordb_email_semantic":
+        case name if 'email' in name:
         # check for presence of email_semantic vectordb
-            if os.path.exists('data\\vectordb_email_semantic'):
+            if os.path.exists(vectorstore_path):
                 # If directory exists, load using Chroma.
                 print('VectorDB found, now loading existing vector database...')
                 # Obtain current script's directory
@@ -120,16 +126,16 @@ def vectordb_acquire(vectordb_name: str):
                 # Go up one level to main directory
                 root_dir = os.path.dirname(current_dir)
                 # construct path to the vectordb folder
-                persist_directory = os.path.join(root_dir,'data\\vectordb_email_semantic')
+                persist_directory = os.path.join(root_dir,vectorstore_path)
                 vectordb = Chroma(
                     persist_directory=persist_directory,
-                    collection_name='email_semantic',
+                    collection_name=vectordb_name,
                     embedding_function=embeddings_model
                 )
-                print('email_semantic vectordb loaded successfully!')
+                print(f'{vectordb_name} loaded successfully!')
             else:
                 print('email_semantic vector database directory not found, proceeding to create vector database.')
-                vectordb = create_email_vectordb(embeddings_model)
+                vectordb = create_email_vectordb(embeddings_model,vectordb_name)
 
             return vectordb # return vectordb to be used
         
@@ -193,28 +199,42 @@ def substantiate_water_quality_parameter(wq_parameters): # consider using the pa
     vectordb = vectordb_acquire("vectordb_wq_reference")
     # llm to be used in RAG pipeplines in this notebook
     llm = ChatOpenAI(model='gpt-4o-mini', temperature=0, seed=42)
-    template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, \
-    just say that you don't know, don't try to make up an answer. Use five sentences maximum. Cite the relevant sections \
-    where possible. Keep the answer as concise as possible.
-    {context}
+    template = """You are an AI tasked with finding relevant reference materials related to water quality parameters mentioned in the question. 
+    Use the provided context to formulate a concise answer. If you don't know the answer, say, "I don't know"—don't guess. 
+    Answer in 5 sentences or fewer, and cite specific sections or references where possible.
+
+    Context: {context}
+
     Question: {question}
-    Helpful Answer:"""
+
+    Your Answer: 
+    """
     QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
-    print('stopped before qa_chain')
-    # Run chain
-    qa_chain = RetrievalQA.from_chain_type(
-        llm = llm,
-        retriever=vectordb.as_retriever(k=5),
-        return_source_documents=False, # Make inspection of document possible
-        chain_type_kwargs={"prompt": QA_CHAIN_PROMPT}
-    )
-    print('stopped before qa_chain.invoke')
-    return qa_chain.invoke(f'Obtain the guideline values and relevant information for the the parameters listed in {wq_parameters}')
+    print('QA_chain prompt formed')
+    
+    # Debugging: Check if retrieval returns results
+    retrieved_docs = vectordb.as_retriever(k=10).get_relevant_documents(f'Obtain guideline values for {wq_parameters}')
+    if not retrieved_docs:
+        return "No relevant reference materials found for the given parameters."
+
+    # Run the RetrievalQA chain
+    try:
+        qa_chain = RetrievalQA.from_chain_type(
+            llm=llm,
+            retriever=vectordb.as_retriever(k=10),
+            return_source_documents=False,  # Set to True for debugging if needed
+            chain_type_kwargs={"prompt": QA_CHAIN_PROMPT}
+        )
+        answer = qa_chain.invoke(f'Obtain the guideline values and relevant information for the parameters listed in {wq_parameters}')
+    except Exception as e:
+        return f"Error during QA chain execution: {str(e)}"
+    
+    return answer
 
 #4. Get relevant email records
-def get_email_records(user_message):
+def get_email_records(user_message,vectordb_name):
     # Check for presence of vectordb
-    vectordb = vectordb_acquire("vectordb_email_semantic")
+    vectordb = vectordb_acquire(vectordb_name)
 
     output_step_4 = vectordb.similarity_search_with_relevance_scores(user_message, k=4)
     return output_step_4
@@ -223,35 +243,72 @@ def get_email_records(user_message):
 def generate_response_based_on_water_quality_standards(user_message, water_quality_parameters, wq_parameters_reference, email_archives):
     delimiter = "####"
 
-    system_message = f"""
-    Follow these steps to answer the customer queries.
-    The customer query will be delimited with a pair {delimiter}.
+    # ORIGINAL PROMPT
+    # system_message = f"""
+    # Follow these steps to answer the customer queries.
+    # The customer query will be delimited with a pair {delimiter}.
 
-    Step 1:{delimiter} If the user is is asking about water quality, \
-    understand the relevant parameter(s) from the 'Parameter List' column in table below:
-    {water_quality_parameters}
+    # Step 1:{delimiter} If the user is is asking about water quality, \
+    # understand the relevant parameter(s) from the 'Parameter List' column in table below:
+    # {water_quality_parameters}
 
-    Step 2:{delimiter} Present the water quality parameters (listed in Step 1) and PUB Drinking Water Standard\
-    in table format. The water quality parameters must be on the first column, with 'PUB Drinking Water Standard Average' \
-    and 'PUB Drinking Water Standard Range' on subsequent columns. \
-    Do not make comparisons between 'PUB Drinking Water Standard Range' and 'PUB Drinking Water Standard Average'.
-    State the WHO Guidelines and EPH Regulations for the parameters found in {wq_parameters_reference}, 
-    assure water is safe for drinking. You must only rely on figures from the table. 
+    # Step 2:{delimiter} Present the water quality parameters (listed in Step 1) and PUB Drinking Water Standard\
+    # in table format. The water quality parameters must be on the first column, with 'PUB Drinking Water Standard Average' \
+    # and 'PUB Drinking Water Standard Range' on subsequent columns. \
+    # Do not make comparisons between 'PUB Drinking Water Standard Range' and 'PUB Drinking Water Standard Average'.
+    # State the WHO Guidelines and EPH Regulations for the parameters found in {wq_parameters_reference}, 
+    # assure water is safe for drinking. You must only rely on figures from the table. 
     
-    Step 3:{delimiter}: Provide a draft email body using the writing style using content from {email_archives}.  
-    Answer the customer in a friendly tone. \
-    Do not make comparisons between 'PUB Drinking Water Standard Range' and 'PUB Drinking Water Standard Average'. \
-    Make sure the statements are factually accurate. \
-    Avoid repeating points from Step 2.
-    Use Neural Linguistic Programming to construct your response.
+    # Step 3:{delimiter}: Provide a draft email body using the writing style using content from {email_archives}.  
+    # Answer the customer in a friendly tone. \
+    # Do not make comparisons between 'PUB Drinking Water Standard Range' and 'PUB Drinking Water Standard Average'. \
+    # Make sure the statements are factually accurate. \
+    # Avoid repeating points from Step 2.
+    # Use Neural Linguistic Programming to construct your response.
 
-    Use the following format:
-    {delimiter} <Water quality table & Reasoning>
+    # Use the following format:
+    # {delimiter} <Water quality table & Reasoning>
+    # {delimiter} <response to customer>
+
+    # Make sure to include {delimiter} to separate every step.
+    # """
+    system_message = f'''
+    Follow these steps to answer customer queries about water quality. The customer query will be delimited with a pair {delimiter}.
+
+    ### Step 1: Identify Relevant Parameters  
+    Identify if the query mentions any specific water quality parameters from the 'Parameter List' column in the table below:  
+    {water_quality_parameters}  
+
+    - If relevant parameters are found, list them in bullet form.
+    - If no parameters are found, state "No specific parameters mentioned."
+
+    ### Step 2: Present Water Quality Standards  
+    For the parameters identified in Step 1:  
+    - Create a table summarizing the following:
+    - Water Quality Parameter (1st column)  
+    - PUB Drinking Water Standard Average (2nd column)  
+    - PUB Drinking Water Standard Range (3rd column)  
+    - Use WHO Guidelines and EPH Regulations to substantiate the response for each parameter.
+    - Conclude whether the water meets safety guidelines for drinking based on the data.
+    
+    ### Step 3: Draft a Customer-Focused Email  
+    Write a draft email response using information from {email_archives}.  
+    - The tone should be friendly, professional, and reassuring.  
+    - Avoid repeating technical data from Step 2 verbatim. Instead:
+    - Summarize conclusions in layman’s terms.
+    - Provide additional helpful context, if necessary.
+    - Use examples or templates from {email_archives} to align the style with past correspondence.  
+
+    ### Formatting:  
+    - Begin each step with {delimiter}.  
+    - End each step with {delimiter}.  
+    - Include "Water quality table & Reasoning" and "Response to customer" sections.  
+    - Ensure statements are factually accurate and aligned with the provided data.
+
+    Deliver your response in this format:
+    {delimiter} <Water quality table & Reasoning>  
     {delimiter} <response to customer>
-
-    Make sure to include {delimiter} to separate every step.
-    """
-
+    '''
     messages =  [
         {'role':'system',
          'content': system_message},
@@ -275,9 +332,10 @@ def process_user_message_wq(user_input):
 
     # Process 3: Match with PUB water quality standards and regulatory guidelines
     process_step_3 = substantiate_water_quality_parameter(process_step_1)
+    print('qa_chain invoked successfully initiaized')
 
     # Process 4: Match with PUB water quality standards and regulatory guidelines
-    process_step_4 = get_email_records(user_input) 
+    process_step_4 = get_email_records(user_input,'email_semantic_98') 
 
     # Process 5: Generate Response based on Course Details
     reply = generate_response_based_on_water_quality_standards(user_input,process_step_2,process_step_3,process_step_4)

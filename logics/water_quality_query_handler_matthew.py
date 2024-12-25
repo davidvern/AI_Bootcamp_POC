@@ -6,6 +6,7 @@
 
 import logging
 logging.basicConfig(level=logging.INFO, filename="log.log", filemode = 'w')
+
 from helper_functions import llm
 from helper_functions.llm import get_completion_by_messages
 import os
@@ -17,9 +18,7 @@ from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain.chains import RetrievalQA, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
+from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 import chromadb
 
@@ -30,24 +29,21 @@ import json
 water_quality_df = pd.read_csv('data/utf8_Consolidated WQ Parameters.csv')
 parameter_list = water_quality_df['Parameter List'].tolist()
 
-# Test Query Loop
-# user_input = 'What is the pH and colour in PUB water?'
-
 # Supporting functions
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 # Creation of vectordb
-def create_email_vectordb(embeddings_model):
-# Use .listdir() method to list all the files and directories of a specified location
-# Define directory for emails
+def create_email_vectordb(embeddings_model,vectordb_name):
+    vectorstore_path = "data/vectordb_" + vectordb_name
+    # Use .listdir() method to list all the files and directories of a specified location
+    # Define directory for emails
     directory = os.listdir('data/Queries Received and Email Responses')
-# Empty list which will be used to append new values
+    # Empty list which will be used to append new values
     list_of_emails = []
 
     for filename in directory:
         filename = "data" + '/' + 'Queries Received and Email Responses' + '/' + filename
-        logging.info(filename)
         loader = OutlookMessageLoader(filename)
         text_from_file = loader.load()
         # append the text from the single file to the existing list
@@ -57,20 +53,17 @@ def create_email_vectordb(embeddings_model):
     text_splitter = SemanticChunker(embeddings_model)
 # Split the documents into smaller chunks
     splitted_documents = text_splitter.split_documents(list_of_emails)
-    print(len(splitted_documents))
 # Create Vector Database
     vectordb = Chroma.from_documents(
         filter_complex_metadata(splitted_documents),
         embedding=embeddings_model, 
-        collection_name='email_semantic_80', 
-        persist_directory='data/vectordb_email_semantic_80' # define location directory to save the vectordb
+        collection_name= vectordb_name, 
+        persist_directory= vectorstore_path # define location directory to save the vectordb
     ) 
-    
-    # return vectordb to be used
-    return vectordb
+    return vectordb # return vectordb to be used
 
 # Checking for presence of vectordb, spun off as a separate function as it is used on Step 3 and 4.
-def email_vectordb_acquire(vectorstore_name):
+def vectordb_acquire(vectorstore_name):
 
     # Create embeddings model
     embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
@@ -93,7 +86,7 @@ def email_vectordb_acquire(vectorstore_name):
         print(f'{vectorstore_name} vectordb loaded successfully!')
     else:
         print('Vector database directory not found, proceeding to create vector database.')
-        vectordb = create_email_vectordb(embeddings_model)
+        vectordb = create_email_vectordb(embeddings_model,vectorstore_name)
 
     return vectordb
 
@@ -140,9 +133,9 @@ def get_water_quality_guidelines(list_of_water_quality_parameters: list):
 
 #3. Extract information from previous email archives
 
-def extract_email_information(user_message):
+def extract_email_information(user_message,vectordb_name):
     
-    vectordb = email_vectordb_acquire("email_semantic_80")
+    vectordb = vectordb_acquire(vectordb_name)
     llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
     logging.debug("LLM initialized.")
 
@@ -184,9 +177,9 @@ def extract_email_information(user_message):
 
 #4. Get relevant email records
 
-def get_email_records(user_message):
+def get_email_records(user_message,vectordb_name):
     # Check for presence of vectordb
-    vectordb = email_vectordb_acquire('email_semantic_80')
+    vectordb = vectordb_acquire(vectordb_name)
 
     output_step_4 = vectordb.similarity_search_with_relevance_scores(user_message, k=4)
     return output_step_4
@@ -252,10 +245,11 @@ def process_user_message_wq(user_input):
     process_step_2 = get_water_quality_guidelines(process_step_1)
 
     # Process 3: Match with PUB water quality standards and regulatory guidelines
-    process_step_3 = extract_email_information(user_input)
+    vectordb_name = "email_semantic_98"
+    process_step_3 = extract_email_information(user_input,vectordb_name)
 
     # Process 4: Match with PUB water quality standards and regulatory guidelines
-    process_step_4 = get_email_records(user_input)
+    process_step_4 = get_email_records(user_input,vectordb_name)
 
     # Process 5: Generate Response based on Course Details
     reply = generate_response_based_on_water_quality_standards(user_input,process_step_2,process_step_3,process_step_4)
