@@ -2,6 +2,9 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 import tiktoken
+
+import asyncio
+
 load_dotenv('.env')
 
 # Load APIKey into OpenAI Model
@@ -48,6 +51,24 @@ def get_completion_by_messages(messages, model="gpt-4o-mini", temperature=0, top
         top_p=top_p,
         max_tokens=max_tokens,
         n=1,
+        response_format=output_json_structure
+    )
+    return response.choices[0].message.content
+
+# Define async version of the get_completion_by_messages
+async def get_completion_by_messages_async(messages, model="gpt-4o-mini", temperature=0, top_p=1.0, max_tokens=1024, n=1, json_output=False):
+    if json_output:
+        output_json_structure = {"type": "json_object"}
+    else:
+        output_json_structure = None
+
+    response = await client.chat.completions.acreate(
+        model=model,
+        messages=messages,
+        temperature=temperature,
+        top_p=top_p,
+        max_tokens=max_tokens,
+        n=n,
         response_format=output_json_structure
     )
     return response.choices[0].message.content

@@ -4,6 +4,8 @@ import extract_msg
 import email
 import io
 import hashlib
+import aiofiles.os
+
 
 # """  
 # This file contains the common components used in the Streamlit App.  
@@ -119,3 +121,6 @@ def email_msg_import(raw_msg):
 
 def generate_checksum(query):
     return hashlib.md5(query.encode()).hexdigest()[:8]
+
+async def async_os_path_exists(path):
+    return await aiofiles.os.path.exists(path)

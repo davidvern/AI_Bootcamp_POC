@@ -8,8 +8,18 @@
 import json
 from helper_functions import llm
 # from logics.water_quality_query_handler_matthew import process_user_message_wq, vectordb_acquire
-from logics.water_quality_query_handler import process_user_message_wq, vectordb_acquire
+# from logics.water_quality_query_handler import process_user_message_wq, vectordb_acquire
+from logics.water_quality_query_handler_async import process_user_message_wq, vectordb_acquire
 from logics.product_claim_query_handler import final_production_claim_response
+
+import asyncio
+
+async def run_process_user_message_wq(public_query):
+    result = await process_user_message_wq(public_query)
+    return result
+
+def sync_process_user_message_wq(public_query):
+    return asyncio.run(run_process_user_message_wq(public_query))
 
 def initial_response(public_query):
     # The role of this function is to take in the public_query (in the context of this script, it is the body of the email query).
@@ -69,7 +79,7 @@ def intermediate_response(public_query,query_category_result):
     if query_category_result['water quality']:
         # pass into water_quality_handler.py
         print('True for water_quality testing category')
-        water_quality_response = process_user_message_wq(public_query)       
+        water_quality_response = sync_process_user_message_wq(public_query)       
 
     if query_category_result['water testing request']:
         print('True for water testing request')
