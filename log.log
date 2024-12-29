@@ -1,5 +1,551 @@
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__attach_version1.0_#00000000/__substg1.0_3701000D/__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__attach_version1.0_#0000000A/__substg1.0_3701000D/__attach_version1.0_#00000006/__substg1.0_3701000D/__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000003/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000004/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000003/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000004/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.message_base:Header is empty or was not found. Header will be generated from other streams.
+WARNING:extract_msg.msg_classes.msg:Encoding property not found. Defaulting to ISO-8859-15.
+INFO:extract_msg.msg_classes.msg:Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
+INFO:extract_msg.msg_classes.msg:Stream "__recip_version1.0_#00000000/__substg1.0_39FE001E" was requested but could not be found. Returning `None`.
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
 INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
 INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"

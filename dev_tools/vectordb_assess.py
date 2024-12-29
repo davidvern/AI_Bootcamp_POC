@@ -25,7 +25,7 @@ root_dir = os.path.dirname(current_dir)
 
 # construct path to the vectordb folder
 
-persist_directory = os.path.join(root_dir,'data\\vectordb_email_semantic_98')
+persist_directory = os.path.join(root_dir,'data\\vectordb_wq_reference')
 
 client = chromadb.PersistentClient(path = persist_directory)
 

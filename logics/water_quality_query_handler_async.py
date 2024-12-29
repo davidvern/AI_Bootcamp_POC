@@ -137,7 +137,7 @@ def vectordb_acquire(vectordb_name: str):
                 )
                 print(f'{vectordb_name} loaded successfully!')
             else:
-                print('email_semantic vector database directory not found, proceeding to create vector database.')
+                print(f'{vectordb_name} vector database directory not found, proceeding to create vector database.')
                 vectordb = create_email_vectordb(embeddings_model,vectordb_name)
 
             return vectordb # return vectordb to be used
@@ -158,9 +158,9 @@ def vectordb_acquire(vectordb_name: str):
                     collection_name='wq_reference',
                     embedding_function=embeddings_model
                 )
-                print('wq_reference vectordb loaded successfully!')
+                print(f'{vectordb_name} vectordb loaded successfully!')
             else:
-                print('wq_reference vector database directory not found, proceeding to create vector database.')
+                print(f'{vectordb_name} vector database directory not found, proceeding to create vector database.')
                 vectordb = create_wq_reference_vectordb(embeddings_model)
                 
             return vectordb # return vectordb to be used
@@ -331,12 +331,17 @@ async def process_user_message_wq(user_input):
     # Process 1: identify_water_quality parameter
     process_step_1 = identify_water_quality_parameter(user_input)
 
+    # Setup vectordbs before entering async portions
+    email_vectordb = 'email_semantic_98'
+    vectordb_acquire('email_semantic_98')
+    vectordb_acquire("vectordb_wq_reference")
+
     # Create tasks for processes 2, 3, and 4
     loop = asyncio.get_event_loop()
     tasks = [
         loop.run_in_executor(None, partial(get_water_quality_guidelines, process_step_1)),
         loop.run_in_executor(None, partial(substantiate_water_quality_parameter, process_step_1)),
-        loop.run_in_executor(None, partial(get_email_records, user_input, 'email_semantic_98'))
+        loop.run_in_executor(None, partial(get_email_records, user_input, email_vectordb))
     ]
     # Wait for all tasks to complete
 
