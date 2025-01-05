@@ -13,6 +13,7 @@ ENV PYTHONUNBUFFERED True
 # This line is needed for the app to work in CStack 
 RUN groupadd --gid 1001 app && useradd --uid 1001 --gid 1001 -ms /bin/bash app
 
+
 #  Sets the working directory for the container to `/home/app`. All subsequent commands will be run from this directory.
 WORKDIR /home/app
 # Copies the `requirements.txt` file from the local machine to the current working directory in the container (`/home/app`).
@@ -33,4 +34,4 @@ COPY --chown=app:app . ./
 # This is used for documentation purposes and does not actually publish the port.
 EXPOSE 8501
 # Specifies the command to run when the container starts. In this case, it runs a Streamlit application using the `main.py` script.
-CMD streamlit run Try_Chatbot.py
+CMD streamlit run Try_Chatbot_3Nov.py
