@@ -1,5 +1,8 @@
 # main file to be run by streamlit.
 # Set up and run this Streamlit App
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 from helper_functions.utility import text_import, email_msg_import, check_password
 from logics.email_query_handler import full_workflow
