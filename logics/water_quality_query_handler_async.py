@@ -116,7 +116,7 @@ def create_wq_reference_vectordb(embeddings_model):
 def vectordb_acquire(vectordb_name: str):
     # Create embeddings model
     embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
-    vectorstore_path = "data\\vectordb_" + vectordb_name
+    vectorstore_path = "data/vectordb_" + vectordb_name
     # Create code to differentiate between the two vectordbs (vectordb_email_semantic and vectordb_reference) in this workflow
     match vectordb_name.lower():
         case name if 'email' in name:
@@ -144,7 +144,7 @@ def vectordb_acquire(vectordb_name: str):
         
         case "vectordb_wq_reference":
         # check for the presence of vectordb_wq_reference
-            if os.path.exists('data\\vectordb_wq_reference'):
+            if os.path.exists('data/vectordb_wq_reference'):
                 # If directory exists, load using Chroma.
                 print('VectorDB found, now loading existing vector database...')
                 # Obtain current script's directory
@@ -152,7 +152,7 @@ def vectordb_acquire(vectordb_name: str):
                 # Go up one level to main directory
                 root_dir = os.path.dirname(current_dir)
                 # construct path to the vectordb folder
-                persist_directory = os.path.join(root_dir,'data\\vectordb_wq_reference')
+                persist_directory = os.path.join(root_dir,'data/vectordb_wq_reference')
                 vectordb = Chroma(
                     persist_directory=persist_directory,
                     collection_name='wq_reference',
