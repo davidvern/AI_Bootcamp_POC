@@ -1,8 +1,11 @@
 # main file to be run by streamlit.
 # Set up and run this Streamlit App
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 from helper_functions.utility import text_import, email_msg_import, check_password
-from email_query_handler import full_workflow
+from logics.email_query_handler import full_workflow
 import io
 import email
 
@@ -34,7 +37,7 @@ if 'designation_input' not in st.session_state:
 
 if st.session_state.page == 'input':
     # st.image("data/Information_page/PUB_logo.png")
-    st.logo("data/Information_page/PUB_logo.png")
+    # st.logo("data/Information_page/PUB_logo.png")
     st.title("Ask Your Question Here!")
     st.sidebar.title("Welcome to Water Quality Chatbot!")
     with st.expander('Click to see disclaimer'):
@@ -107,4 +110,3 @@ elif st.session_state.page == 'output':
         st.session_state.page = 'input'
         st.session_state.response = None  # Clear the response
         st.rerun()
-

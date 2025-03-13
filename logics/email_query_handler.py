@@ -7,8 +7,19 @@
 
 import json
 from helper_functions import llm
-from logics.water_quality_query_handler_matthew import process_user_message_wq, email_vectordb_acquire
+# from logics.water_quality_query_handler_matthew import process_user_message_wq, vectordb_acquire
+# from logics.water_quality_query_handler import process_user_message_wq, vectordb_acquire
+from logics.water_quality_query_handler_async import process_user_message_wq, vectordb_acquire
 from logics.product_claim_query_handler import final_production_claim_response
+
+import asyncio
+
+async def run_process_user_message_wq(public_query):
+    result = await process_user_message_wq(public_query)
+    return result
+
+def sync_process_user_message_wq(public_query):
+    return asyncio.run(run_process_user_message_wq(public_query))
 
 def initial_response(public_query):
     # The role of this function is to take in the public_query (in the context of this script, it is the body of the email query).
@@ -68,7 +79,7 @@ def intermediate_response(public_query,query_category_result):
     if query_category_result['water quality']:
         # pass into water_quality_handler.py
         print('True for water_quality testing category')
-        water_quality_response = process_user_message_wq(public_query)       
+        water_quality_response = sync_process_user_message_wq(public_query)       
 
     if query_category_result['water testing request']:
         print('True for water testing request')
@@ -120,7 +131,7 @@ def water_testing_query_handler(public_query):
 def response_consolidation(query_category,water_quality_response, water_testing_response, product_claim_response,public_query,email_elements):
     print('Individual queries completed. Now consolidating...')
     # Check for presence of vectordb
-    vectordb = email_vectordb_acquire()
+    vectordb = vectordb_acquire("email_semantic_98")
     email_reference = vectordb.similarity_search_with_relevance_scores(public_query, k=4)
 
     delimiter = "###"
@@ -130,6 +141,7 @@ def response_consolidation(query_category,water_quality_response, water_testing_
     1. **Delimitation**: The public's query will be delimited by `{delimiter}`. Only content within these delimiters should be processed.
 
     2. **Input Handling**: The response to the public's query will be based on the inputs from {water_quality_response}, {water_testing_response}, and {product_claim_response}. 
+    - If water_quality_response contains tables, ensure these tables are included in the final response.
     - If any of these inputs are {None}, ignore that input as it indicates the category is not relevant.
     - Consolidate the relevant inputs to address the public's query comprehensively.
 
