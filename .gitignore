@@ -7,6 +7,7 @@ __pycache__/
 venv/
 env/
 ENV/
+venv_311/
 .venv/
 .env
 
@@ -27,5 +28,10 @@ dist/
 data/basic_chroma_langchain_db/
 data/*.sqlite3
 data/vectordb_email_semantic
-data/PUB_FAQ_collection
-data/vectordb_wq_reference
+# data/PUB_FAQ_collection
+#data/vectordb_wq_reference
+data/vectordb_email_semantic_80
+#data/vectordb_email_semantic_98
+
+# log files
+log.log

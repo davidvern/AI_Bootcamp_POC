@@ -4,6 +4,9 @@
 # 3. Extract information from previous email archives
 # 4. generate_response_based_on_water_quality_standards
 
+import logging
+logging.basicConfig(level=logging.INFO, filename="log.log", filemode = 'w')
+
 from helper_functions import llm
 from helper_functions.llm import get_completion_by_messages
 import os
@@ -13,7 +16,11 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import OutlookMessageLoader
 from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain.chains import RetrievalQA
+from langchain.chains import RetrievalQA, create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_core.prompts import ChatPromptTemplate
+from langchain.chains.combine_documents import create_stuff_documents_chain
+import chromadb
 
 # Import the data file in csv format
 import pandas as pd
@@ -22,17 +29,17 @@ import json
 water_quality_df = pd.read_csv('data/utf8_Consolidated WQ Parameters.csv')
 parameter_list = water_quality_df['Parameter List'].tolist()
 
-# Test Query Loop
-# user_input = 'What is the pH and colour in PUB water?'
-
 # Supporting functions
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
 
 # Creation of vectordb
-def create_email_vectordb(embeddings_model):
-# Use .listdir() method to list all the files and directories of a specified location
-# Define directory for emails
+def create_email_vectordb(embeddings_model,vectordb_name):
+    vectorstore_path = "data/vectordb_" + vectordb_name
+    # Use .listdir() method to list all the files and directories of a specified location
+    # Define directory for emails
     directory = os.listdir('data/Queries Received and Email Responses')
-# Empty list which will be used to append new values
+    # Empty list which will be used to append new values
     list_of_emails = []
 
     for filename in directory:
@@ -50,37 +57,36 @@ def create_email_vectordb(embeddings_model):
     vectordb = Chroma.from_documents(
         filter_complex_metadata(splitted_documents),
         embedding=embeddings_model, 
-        collection_name='email_semantic', 
-        persist_directory='data/vectordb_email_semantic' # define location directory to save the vectordb
+        collection_name= vectordb_name, 
+        persist_directory= vectorstore_path # define location directory to save the vectordb
     ) 
-    
-    # return vectordb to be used
-    return vectordb
+    return vectordb # return vectordb to be used
 
 # Checking for presence of vectordb, spun off as a separate function as it is used on Step 3 and 4.
-def email_vectordb_acquire():
+def vectordb_acquire(vectorstore_name):
 
     # Create embeddings model
     embeddings_model = OpenAIEmbeddings(model = 'text-embedding-3-small',show_progress_bar=True)
     # check for presence of email_semantic vectordb
-    if os.path.exists('data\\vectordb_email_semantic'):
+    vectorstore_path = "data\\vectordb_" + vectorstore_name
+    if os.path.exists(vectorstore_path):
         print('VectorDB found, now loading existing vector database...')
         # Obtain current script's directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
         # Go up one level to main directory
         root_dir = os.path.dirname(current_dir)
         # construct path to the vectordb folder
-        persist_directory = os.path.join(root_dir,'data\\vectordb_email_semantic')
+        persist_directory = os.path.join(root_dir,vectorstore_path)
 
         vectordb = Chroma(
             persist_directory=persist_directory,
-            collection_name='email_semantic',
+            collection_name=vectorstore_name,
             embedding_function=embeddings_model
         )
-        print('email_semantic vectordb loaded successfully!')
+        print(f'{vectorstore_name} vectordb loaded successfully!')
     else:
         print('Vector database directory not found, proceeding to create vector database.')
-        vectordb = create_email_vectordb(embeddings_model)
+        vectordb = create_email_vectordb(embeddings_model,vectorstore_name)
 
     return vectordb
 
@@ -127,27 +133,53 @@ def get_water_quality_guidelines(list_of_water_quality_parameters: list):
 
 #3. Extract information from previous email archives
 
-def extract_email_information(user_message):
-    # Check for presence of vectordb
-    vectordb = email_vectordb_acquire()
+def extract_email_information(user_message,vectordb_name):
+    
+    vectordb = vectordb_acquire(vectordb_name)
+    llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
+    logging.debug("LLM initialized.")
 
-    # llm to be used in RAG pipeplines in this notebook
-    llm = ChatOpenAI(model='gpt-4o-mini', temperature=0, seed=42)
+    retriever = vectordb.as_retriever(k=4)
+    logging.debug("Retriever initialized.")
 
-    # Create RAG Chain
-    retriever_chain_from_llm = RetrievalQA.from_llm(
-        retriever=vectordb.as_retriever(), llm=llm
+    system_prompt = """
+        You are an assistant for question-answering tasks.
+        Use the following pieces of retrieved context to answer
+        the question. If you don't know the answer, say that you
+        don't know.
+        \n\n
+        {context} 
+    """
+    logging.debug("System prompt created.")
+
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", system_prompt),
+            ("human", "{input}"),
+        ]
     )
-    output_step_3 = retriever_chain_from_llm.invoke(user_message)
-    return output_step_3
+    logging.debug("Prompt template created.")
+
+    question_answer_chain = create_stuff_documents_chain(llm, prompt)
+    rag_chain = create_retrieval_chain(retriever, question_answer_chain)
+    logging.info("RAG chain created successfully.")
+
+    try:
+        logging.debug("Invoking RAG chain...")
+        response = rag_chain.invoke({"input": user_message})
+        logging.info("RAG chain invocation successful.")
+        return response["answer"]
+    except Exception as e:
+        logging.error(f"An error occurred during RAG chain invocation: {e}")
+        return None
 
     # result_step_3 = extract_email_information(user_input)
 
 #4. Get relevant email records
 
-def get_email_records(user_message):
+def get_email_records(user_message,vectordb_name):
     # Check for presence of vectordb
-    vectordb = email_vectordb_acquire()
+    vectordb = vectordb_acquire(vectordb_name)
 
     output_step_4 = vectordb.similarity_search_with_relevance_scores(user_message, k=4)
     return output_step_4
@@ -213,10 +245,11 @@ def process_user_message_wq(user_input):
     process_step_2 = get_water_quality_guidelines(process_step_1)
 
     # Process 3: Match with PUB water quality standards and regulatory guidelines
-    process_step_3 = extract_email_information(user_input)
+    vectordb_name = "email_semantic_98"
+    process_step_3 = extract_email_information(user_input,vectordb_name)
 
     # Process 4: Match with PUB water quality standards and regulatory guidelines
-    process_step_4 = get_email_records(user_input)
+    process_step_4 = get_email_records(user_input,vectordb_name)
 
     # Process 5: Generate Response based on Course Details
     reply = generate_response_based_on_water_quality_standards(user_input,process_step_2,process_step_3,process_step_4)
