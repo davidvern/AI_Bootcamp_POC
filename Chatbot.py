@@ -8,6 +8,9 @@ from helper_functions.utility import text_import, email_msg_import, check_passwo
 from logics.email_query_handler import full_workflow
 import io
 import email
+import streamlit as st
+
+pw = st.secrets["password"] 
 
 # region <--------- Streamlit App Configuration --------->
 st.set_page_config(
