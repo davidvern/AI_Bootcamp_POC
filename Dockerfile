@@ -5,7 +5,7 @@
 # It uses the official Python image from Docker Hub, 
 # specifically the version 3.12 with the "slim" variant
 # which is a smaller, more lightweight version of the full Python image.
-FROM python:3.12-slim
+FROM python:3.11-slim
 
 # This ensures that Python output is not buffered, 
 # which is useful for real-time logging and debugging.
@@ -34,4 +34,4 @@ COPY --chown=app:app . ./
 # This is used for documentation purposes and does not actually publish the port.
 EXPOSE 8501
 # Specifies the command to run when the container starts. In this case, it runs a Streamlit application using the `main.py` script.
-CMD streamlit run Try_Chatbot_3Nov.py
+CMD streamlit run Chatbot.py
